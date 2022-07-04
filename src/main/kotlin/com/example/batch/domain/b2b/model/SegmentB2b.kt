@@ -1,4 +1,4 @@
-package com.example.batch.domain
+package com.example.batch.domain.b2b.model
 
 enum class SegmentB2b(val id: Int) {
     S(1),

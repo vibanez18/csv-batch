@@ -17,6 +17,7 @@ repositories {
 
 val log4jKotlinVersion = "1.1.0"
 val kotlinCsvVersion = "1.3.0"
+val gsonVersion = "2.7"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-batch")
@@ -26,6 +27,7 @@ dependencies {
 	implementation("org.apache.logging.log4j:log4j-api-kotlin:$log4jKotlinVersion")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("com.google.code.gson:gson:$gsonVersion")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

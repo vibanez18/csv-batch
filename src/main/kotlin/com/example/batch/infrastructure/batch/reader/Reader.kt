@@ -1,7 +1,7 @@
 package com.example.batch.infrastructure.batch.reader
 
-import com.example.batch.domain.ModelB2b
-import com.example.batch.domain.ModelB2bSetMapper
+import com.example.batch.domain.b2b.model.ModelB2b
+import com.example.batch.domain.b2b.ModelB2bSetMapper
 import org.springframework.batch.core.configuration.annotation.StepScope
 import org.springframework.batch.item.file.FlatFileItemReader
 import org.springframework.batch.item.file.mapping.DefaultLineMapper

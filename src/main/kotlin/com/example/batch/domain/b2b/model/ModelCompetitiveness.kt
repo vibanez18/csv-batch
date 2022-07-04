@@ -1,6 +1,4 @@
-package com.example.batch.domain
-
-import com.example.batch.domain.Competitiveness
+package com.example.batch.domain.b2b.model
 
 data class ModelCompetitiveness(
     val type: Competitiveness,

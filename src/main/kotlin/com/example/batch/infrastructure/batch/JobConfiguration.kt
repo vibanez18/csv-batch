@@ -1,6 +1,8 @@
 package com.example.batch.infrastructure.batch
 
-import com.example.batch.domain.ModelB2b
+import com.example.batch.domain.b2b.entity.B2bEntity
+import com.example.batch.domain.b2b.model.ModelB2b
+import com.example.batch.infrastructure.batch.processor.Processor
 import com.example.batch.infrastructure.batch.reader.Reader
 import com.example.batch.infrastructure.batch.writer.Writer
 import org.apache.logging.log4j.kotlin.Logging
@@ -19,20 +21,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
 class JobConfiguration(val jobBuilderFactory: JobBuilderFactory,
                        val stepBuilderFactory: StepBuilderFactory,
                        val reader: Reader,
+                       val processor: Processor,
                        val writer: Writer,
                        @Value("\${ms-batch.size}") val chunkSize: Int
 ): Logging {
-//    @Bean
-//    @StepScope
-//    fun reader() = Reader()
-
-//    @Bean
-//    fun itemProcessor(): ItemProcessor<String, String> = Processor()()
-
-//    @Bean
-//    fun itemWriter() : ItemWriter<ModelB2b> = Writer()
-
-
     @Bean
     fun taskExecutor(): ThreadPoolTaskExecutor {
         val exec = ThreadPoolTaskExecutor()
@@ -45,9 +37,9 @@ class JobConfiguration(val jobBuilderFactory: JobBuilderFactory,
     @Bean
     fun insertInDatabaseStep(): Step {
         return stepBuilderFactory["insertInDatabaseStep"]
-            .chunk<ModelB2b, ModelB2b>(chunkSize)
+            .chunk<ModelB2b, B2bEntity>(chunkSize)
             .reader(reader)
-//            .processor(itemProcessor())
+            .processor(processor())
             .writer(writer)
             .faultTolerant()
             .taskExecutor(taskExecutor())

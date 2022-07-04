@@ -1,4 +1,4 @@
-package com.example.batch.domain
+package com.example.batch.domain.b2b.model
 
 data class ModelQuality(
     val hasManufacturerPdf: Boolean,

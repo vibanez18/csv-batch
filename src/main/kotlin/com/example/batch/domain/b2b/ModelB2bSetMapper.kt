@@ -1,5 +1,6 @@
-package com.example.batch.domain
+package com.example.batch.domain.b2b
 
+import com.example.batch.domain.b2b.model.*
 import org.springframework.batch.item.file.mapping.FieldSetMapper
 import org.springframework.batch.item.file.transform.FieldSet
 

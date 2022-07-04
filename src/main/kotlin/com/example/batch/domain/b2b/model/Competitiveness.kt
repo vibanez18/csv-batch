@@ -1,4 +1,4 @@
-package com.example.batch.domain
+package com.example.batch.domain.b2b.model
 
 enum class Competitiveness(val id: Int) {
     FAIR(1),

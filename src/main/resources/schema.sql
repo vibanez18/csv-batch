@@ -7,3 +7,11 @@ create table product_quality_b2b
     constraint "product_quality_b2bPK"
         primary key (audience, model_id, platform)
 );
+
+select
+    pqbb.audience,
+    pqbb."content",
+    pqbb.model_id,
+    pqbb.platform
+from
+    product_quality_b2b pqbb;
