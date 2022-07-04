@@ -16,6 +16,7 @@ repositories {
 }
 
 val log4jKotlinVersion = "1.1.0"
+val kotlinCsvVersion = "1.3.0"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-batch")

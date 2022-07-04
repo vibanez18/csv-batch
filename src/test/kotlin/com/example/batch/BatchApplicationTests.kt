@@ -1,7 +1,9 @@
 package com.example.batch
 
 import org.apache.logging.log4j.kotlin.Logging
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.springframework.batch.core.ExitStatus
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.JobParametersBuilder
 import org.springframework.batch.core.launch.JobLauncher
@@ -30,6 +32,8 @@ class BatchApplicationTests: Logging {
 
 		logger.info("Start Time ${launcher.startTime}")
 		logger.info("End Time ${launcher.endTime}")
+
+		assertThat(launcher.exitStatus).isEqualTo(ExitStatus.COMPLETED)
 	}
 
 }

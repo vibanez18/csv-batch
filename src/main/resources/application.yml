@@ -15,7 +15,7 @@ spring:
         jdbc:
           batch_size: ${batch.size}
   datasource:
-    url: jdbc:postgresql://localhost:5432/test
+    url: jdbc:postgresql://localhost:5432/postgres
     username: test
     password: test
     driver-class-name: org.postgresql.Driver

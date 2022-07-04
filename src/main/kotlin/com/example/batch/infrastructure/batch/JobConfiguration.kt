@@ -1,6 +1,6 @@
 package com.example.batch.infrastructure.batch
 
-import com.example.batch.infrastructure.batch.processor.Processor
+import com.example.batch.domain.ModelB2b
 import com.example.batch.infrastructure.batch.reader.Reader
 import com.example.batch.infrastructure.batch.writer.Writer
 import org.apache.logging.log4j.kotlin.Logging
@@ -9,10 +9,6 @@ import org.springframework.batch.core.Step
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory
-import org.springframework.batch.core.configuration.annotation.StepScope
-import org.springframework.batch.item.ItemProcessor
-import org.springframework.batch.item.ItemWriter
-import org.springframework.batch.item.support.ListItemReader
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -22,17 +18,20 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
 @EnableBatchProcessing
 class JobConfiguration(val jobBuilderFactory: JobBuilderFactory,
                        val stepBuilderFactory: StepBuilderFactory,
+                       val reader: Reader,
+                       val writer: Writer,
                        @Value("\${ms-batch.size}") val chunkSize: Int
 ): Logging {
-    @Bean
-    @StepScope
-    fun reader(): ListItemReader<String> = Reader()()
+//    @Bean
+//    @StepScope
+//    fun reader() = Reader()
 
-    @Bean
-    fun itemProcessor(): ItemProcessor<String, String> = Processor()()
+//    @Bean
+//    fun itemProcessor(): ItemProcessor<String, String> = Processor()()
 
-    @Bean
-    fun itemWriter() : ItemWriter<String> = Writer()()
+//    @Bean
+//    fun itemWriter() : ItemWriter<ModelB2b> = Writer()
+
 
     @Bean
     fun taskExecutor(): ThreadPoolTaskExecutor {
@@ -46,10 +45,10 @@ class JobConfiguration(val jobBuilderFactory: JobBuilderFactory,
     @Bean
     fun insertInDatabaseStep(): Step {
         return stepBuilderFactory["insertInDatabaseStep"]
-            .chunk<String, String>(10)
-            .reader(reader())
-            .processor(itemProcessor())
-            .writer(itemWriter())
+            .chunk<ModelB2b, ModelB2b>(chunkSize)
+            .reader(reader)
+//            .processor(itemProcessor())
+            .writer(writer)
             .faultTolerant()
             .taskExecutor(taskExecutor())
             .build()
